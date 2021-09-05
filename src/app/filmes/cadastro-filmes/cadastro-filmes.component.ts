@@ -24,7 +24,12 @@ export class CadastroFilmesComponent implements OnInit {
     });
   }
 
+  get f() {
+    return this.cadastro.controls;
+  }
+
   salvar(): void {
+    this.cadastro.markAllAsTouched();
     if(this.cadastro.invalid) {
       return;
     }
