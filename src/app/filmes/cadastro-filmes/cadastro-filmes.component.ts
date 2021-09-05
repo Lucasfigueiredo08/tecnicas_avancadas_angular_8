@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'dio-cadastro-filmes',
@@ -12,13 +12,30 @@ export class CadastroFilmesComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit() {
-
+  ngOnInit(): void {
     this.cadastro = this.fb.group({
-      hideRequired: false,
-      floatLabel: 'auto',
+      titulo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
+      urlFoto: ['', [Validators.minLength(10)]],
+      dtLancamento: ['', [Validators.required]],
+      descricao: [''],
+      nota: [0, [Validators.required, Validators.min(0), Validators.max(10)]],
+      urlIMDb: ['', [Validators.minLength(10)]],
+      genero: ['', [Validators.required]]
     });
-
   }
+
+  salvar(): void {
+    if(this.cadastro.invalid) {
+      return;
+    }
+
+    alert('Sucesso!!\n\n' + JSON.stringify(this.cadastro.value, null, 4));
+  }
+
+  reiniciarForm(): void {
+    this.cadastro.reset();
+  }
+
+
 
 }
