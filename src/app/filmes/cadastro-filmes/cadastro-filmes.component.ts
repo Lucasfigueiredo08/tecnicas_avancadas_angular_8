@@ -15,6 +15,7 @@ export class CadastroFilmesComponent implements OnInit {
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    //form build(fb) criando um formcontrol
     this.cadastro = this.fb.group({
       titulo: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       urlFoto: ['', [Validators.minLength(10)]],
@@ -27,7 +28,7 @@ export class CadastroFilmesComponent implements OnInit {
   }
 
   get f() {
-    return this.cadastro.controls;
+    return this.cadastro.controls
   }
 
   salvar(): void {
